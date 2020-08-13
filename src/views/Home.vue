@@ -1,11 +1,9 @@
 <template>
-  <div>bry</div>
+  <div>home page</div>
 </template>
 
 <script>
-export default {
-  name: "Login"
-};
+export default {};
 </script>
 
 <style></style>

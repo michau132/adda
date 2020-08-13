@@ -1,15 +1,24 @@
 <template>
-  <div id="app">
-    <Login />
+  <div id="app" :class="{ pb: isVisible }">
+    <Header v-if="isVisible" />
+    <router-view />
+    <Footer v-if="isVisible" />
   </div>
 </template>
 
 <script>
-import Login from "./components/Login";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 export default {
   name: "App",
   components: {
-    Login
+    Header,
+    Footer
+  },
+  computed: {
+    isVisible() {
+      return this.$route.meta.navigation;
+    }
   }
 };
 </script>
@@ -17,24 +26,26 @@ export default {
 <style lang="scss">
 body {
   font-family: "Roboto", sans-serif;
+  background-color: #ebebeb;
 }
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  width: 100%;
-  @media (min-width: 567px) {
-    max-width: 540px;
-  }
-  @media (min-width: 768px) {
-    max-width: 720px;
-  }
-  @media (min-width: 992px) {
-    max-width: 960px;
-  }
-  @media (min-width: 1200px) {
-    max-width: 1140px;
-  }
+.title {
+  padding: 23px 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+.wrapper {
+  padding: 42px 30px 50px;
+  box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+}
+.fullHeightAndCenter {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pb {
+  padding-bottom: 114px;
 }
 </style>
