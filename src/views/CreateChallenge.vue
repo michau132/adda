@@ -11,7 +11,7 @@
           <Select
             placeholder="Durata"
             :options="timeSelect"
-            v-model="fields.duration"
+            v-model="fields.ends_at"
           />
           <Select
             placeholder="Categoria"
@@ -71,7 +71,7 @@ export default {
         "https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg"
       ],
       fields: {
-        duration: "",
+        ends_at: "",
         category: "",
         image: "",
         name: "",

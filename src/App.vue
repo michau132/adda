@@ -46,6 +46,7 @@ body {
   align-items: center;
 }
 .pb {
+  padding-top: 70px;
   padding-bottom: 114px;
 }
 </style>
