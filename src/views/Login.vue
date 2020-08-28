@@ -51,6 +51,7 @@ export default {
       this.axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${res.data.token}`;
+      localStorage.setItem("avatar", res.data.user_image);
       localStorage.setItem("token", res.data.token);
       this.$router.push("/challenges");
     }

@@ -16,10 +16,10 @@
           <Select
             placeholder="Categoria"
             :options="categories"
-            v-model="fields.category"
+            v-model="fields.interest"
           />
           <ImageSelect
-            v-if="fields.category"
+            v-if="fields.interest"
             :images="images"
             v-model="fields.image"
           />
@@ -65,7 +65,7 @@ export default {
     },
     images() {
       const interest = this.interests.find(
-        el => el.interest.id === this.fields.category
+        el => el.interest.id === this.fields.interest
       );
       if (interest) {
         return interest.interestmedia.map(
@@ -90,7 +90,7 @@ export default {
       duration: "",
       fields: {
         ends_at: "",
-        category: "",
+        interest: "",
         image: "",
         name: "",
         description: "",
@@ -105,7 +105,7 @@ export default {
       e.preventDefault();
       this.fields.ends_at = moment()
         .add(1, this.duration)
-        .toISOString();
+        .format("YYYY-MM-DD HH:MM:SS");
 
       ApiService.post("createChallenge", this.fields);
     }
