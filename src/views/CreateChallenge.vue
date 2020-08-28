@@ -105,7 +105,7 @@ export default {
       e.preventDefault();
       this.fields.ends_at = moment()
         .add(1, this.duration)
-        .format("YYYY-MM-DD HH:MM:SS");
+        .toISOString();
 
       ApiService.post("createChallenge", this.fields);
     }
