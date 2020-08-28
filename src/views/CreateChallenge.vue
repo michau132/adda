@@ -58,7 +58,6 @@ export default {
   computed: {
     ...mapGetters(["interests"]),
     categories() {
-      console.log(this.interests);
       return this.interests.map(el => ({
         label: el.interest.interest,
         value: el.interest.id

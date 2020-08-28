@@ -24,7 +24,6 @@ export default {
   async mounted() {
     const res = await ApiService.get("getChallenges");
     this.challenges = res.data.challenges;
-    console.log(this.challenges);
   }
 };
 </script>
