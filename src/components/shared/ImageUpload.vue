@@ -27,9 +27,7 @@ export default {
     btnText: {
       type: String
     },
-    value: {
-      type: Object
-    },
+    value: {},
     maxFiles: {
       type: Number,
       default() {
@@ -65,7 +63,7 @@ export default {
         this.errorMessage = "";
       }
       setTimeout(() => {
-        this.$emit("input", e);
+        this.$emit("input", e.dataURL);
       }, 100);
     },
     onDropzoneError(file, message) {
@@ -91,6 +89,9 @@ export default {
   img {
     border-radius: 50%;
     box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.25);
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

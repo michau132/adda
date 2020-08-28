@@ -35,9 +35,7 @@ export default {
         return [];
       }
     },
-    value: {
-      type: String
-    },
+    value: {},
     placeholder: {
       type: String
     }

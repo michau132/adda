@@ -11,17 +11,6 @@
             />
           </div>
           <ImageRate class="no-swipe" />
-          <p class="carousel__owner">
-            <span class="carousel__rate">Rate </span>
-            <span class="carousel__figcaption">Suno cat </span>
-            <span>by </span>
-            <span class="carousel__creator">John Rambo </span>
-          </p>
-          <div class="carousel__actions">
-            <ButtonIcon icon="share" label="Invite firends!" alignLabel />
-            <ButtonIcon icon="follow" label="Follow" alignLabel />
-            <a href="#">more...</a>
-          </div>
         </div>
       </swiper-slide>
       <swiper-slide
@@ -51,14 +40,13 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
 import ImageRate from "./ImageRate";
-import ButtonIcon from "../shared/ButtonIcon";
+
 export default {
   name: "Carousel",
   components: {
     swiper,
     swiperSlide,
-    ImageRate,
-    ButtonIcon
+    ImageRate
   },
   data() {
     return {
@@ -104,20 +92,12 @@ export default {
   width: 100%;
   height: 100%;
 }
-.carousel__owner {
-  text-align: center;
-}
+
 .carousel__rate {
   color: #fec850;
 }
 .carousel__figcaption {
   color: #3b3b3b;
   font-weight: bold;
-}
-.carousel__actions {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 10px;
 }
 </style>

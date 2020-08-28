@@ -9,7 +9,7 @@
           ></div>
         </router-link>
         <router-link to="/create" class="c-footer__link">
-          <div class="c-footer__icon" v-html="roundedIcon"></div>
+          <div class="c-footer__icon" v-html="createChallenge"></div>
         </router-link>
         <router-link to="/challenges" class="c-footer__link">
           <div
@@ -24,7 +24,7 @@
 
 <script>
 import homeIcon from "@/assets/img/home.svg";
-import roundedIcon from "@/assets/img/rounded-square.svg";
+import createChallenge from "@/assets/img/create-challenge.svg";
 import trophyIcon from "@/assets/img/tournament.svg";
 
 export default {
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       homeIcon,
-      roundedIcon,
+      createChallenge,
       trophyIcon
     };
   }

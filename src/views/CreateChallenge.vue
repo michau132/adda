@@ -2,7 +2,7 @@
   <div class="c-create-challenge">
     <div class="container">
       <div class="wrapper">
-        <form class="c-create-challenge__form">
+        <form class="c-create-challenge__form" @submit="onSubmit">
           <Input placeholder="Nome della challenge*" v-model="fields.name" />
           <Input
             placeholder="Descrizione della challenge"
@@ -11,14 +11,18 @@
           <Select
             placeholder="Durata"
             :options="timeSelect"
-            v-model="fields.ends_at"
+            v-model="duration"
           />
           <Select
             placeholder="Categoria"
             :options="categories"
             v-model="fields.category"
           />
-          <ImageSelect :images="images" v-model="fields.image" />
+          <ImageSelect
+            v-if="fields.category"
+            :images="images"
+            v-model="fields.image"
+          />
           <Select
             placeholder="Premio"
             :options="rewards"
@@ -39,6 +43,9 @@ import Checkbox from "../components/shared/Checkbox";
 import Button from "../components/shared/Button";
 import ImageSelect from "../components/ImageSelect";
 
+import moment from "moment";
+import ApiService from "../api";
+import { mapGetters } from "vuex";
 export default {
   name: "CreateChallenge",
   components: {
@@ -48,6 +55,27 @@ export default {
     Checkbox,
     Button
   },
+  computed: {
+    ...mapGetters(["interests"]),
+    categories() {
+      console.log(this.interests);
+      return this.interests.map(el => ({
+        label: el.interest.interest,
+        value: el.interest.id
+      }));
+    },
+    images() {
+      const interest = this.interests.find(
+        el => el.interest.id === this.fields.category
+      );
+      if (interest) {
+        return interest.interestmedia.map(
+          el => `http://51.210.149.115/uploads${el.filename}`
+        );
+      }
+      return [];
+    }
+  },
   data() {
     return {
       timeSelect: [
@@ -55,21 +83,12 @@ export default {
         { label: "1 giorno", value: "day" },
         { label: "1 settimana", value: "week" }
       ],
-      categories: [
-        { label: "Travel", value: "travel" },
-        { label: "Travel3", value: "travel3" }
-      ],
       rewards: [
         { label: "Birra", value: "beer" },
         { label: "Gratitudine", value: "gratitude" },
         { label: "Complimenti", value: "complimenti" }
       ],
-      images: [
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
-        "https://images.unsplash.com/photo-1535332371349-a5d229f49cb5?ixlib=rb-1.2.1&w=1000&q=80",
-        "https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg",
-        "https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg"
-      ],
+      duration: "",
       fields: {
         ends_at: "",
         category: "",
@@ -77,9 +96,20 @@ export default {
         name: "",
         description: "",
         reward: "",
-        decide: true
+        decide: true,
+        isFollowing: true
       }
     };
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+      this.fields.ends_at = moment()
+        .add(1, this.duration)
+        .toISOString();
+
+      ApiService.post("createChallenge", this.fields);
+    }
   }
 };
 </script>

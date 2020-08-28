@@ -3,10 +3,14 @@
     <div class="container">
       <div class="wrapper">
         <SignInRegistrationSwitcher />
-        <form class="c-login__form">
+        <form class="c-login__form" @submit="onSubimit">
           <h2 class="title">Sign in</h2>
-          <Input v-model="email" placeholder="Email or username" />
-          <Input v-model="password" type="password" placeholder="Password" />
+          <Input v-model="fields.email" placeholder="Email or username" />
+          <Input
+            v-model="fields.password"
+            type="password"
+            placeholder="Password"
+          />
           <Button type="submit" label="Log in" />
           <h2 class="title">or</h2>
           <Button type="button" class="facebook-btn">
@@ -24,16 +28,32 @@ import Input from "../components/shared/Input";
 import Button from "../components/shared/Button";
 import SignInRegistrationSwitcher from "../components/SignInRegistrationSwitcher";
 
+import ApiService from "../api";
+
 import fbIcon from "@/assets/img/fb.svg";
+
 export default {
   name: "Login",
   components: { Input, Button, SignInRegistrationSwitcher },
   data() {
     return {
-      email: "",
-      password: "",
+      fields: {
+        email: "",
+        password: ""
+      },
       fbIcon
     };
+  },
+  methods: {
+    async onSubimit(e) {
+      e.preventDefault();
+      const res = await ApiService.post("/login", this.fields);
+      this.axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${res.data.token}`;
+      localStorage.setItem("token", res.data.token);
+      this.$router.push("/challenges");
+    }
   }
 };
 </script>

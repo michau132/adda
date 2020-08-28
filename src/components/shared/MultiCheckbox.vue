@@ -2,32 +2,16 @@
   <div class="c-multi-checkbox">
     <p class="c-multi-checkbox__label">{{ label }}</p>
     <ul class="c-multi-checkbox__list">
-      <li class="c-multi-checkbox__item">
+      <li
+        class="c-multi-checkbox__item"
+        v-for="(option, index) in options"
+        :key="index"
+      >
         <Checkbox
           class="c-multi-checkbox__checkbox"
-          placeholder="First item"
-          :value="true"
-        />
-      </li>
-      <li class="c-multi-checkbox__item">
-        <Checkbox
-          class="c-multi-checkbox__checkbox"
-          placeholder="Second item"
-          :value="true"
-        />
-      </li>
-      <li class="c-multi-checkbox__item">
-        <Checkbox
-          class="c-multi-checkbox__checkbox"
-          placeholder="Third item"
-          :value="true"
-        />
-      </li>
-      <li class="c-multi-checkbox__item">
-        <Checkbox
-          class="c-multi-checkbox__checkbox"
-          placeholder="Fourth item"
-          :value="true"
+          :placeholder="option.interest.interest"
+          :value="isInArr(option)"
+          @input="onCheckboxClick(option)"
         />
       </li>
     </ul>
@@ -44,6 +28,23 @@ export default {
   props: {
     label: {
       type: String
+    },
+    options: {},
+    value: {
+      type: Array
+    }
+  },
+  methods: {
+    isInArr(option) {
+      return this.value.includes(option.interest.id);
+    },
+    onCheckboxClick(option) {
+      if (this.isInArr(option)) {
+        const arr = this.value.filter(el => el !== option.interest.id);
+        this.$emit("input", arr);
+      } else {
+        this.$emit("input", [...this.value, option.interest.id]);
+      }
     }
   }
 };

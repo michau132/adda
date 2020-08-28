@@ -3,21 +3,27 @@
     <div class="c-challenge-post__post">
       <div class="post__header">
         <div class="post__profile-img">
-          <img src="/img/img_avatar3.png" />
+          <img
+            :src="
+              'http://51.210.149.115/uploads' + challenge.interest[0].filename
+            "
+          />
         </div>
         <div class="post__info">
-          <h4 class="post__title">jaki tytul</h4>
-          <p class="post__author">By Jan kowalski</p>
+          <h4 class="post__title">{{ challenge.challenge.name }}</h4>
+          <p class="post__author">By {{ challenge.created_by[0].name }}</p>
         </div>
       </div>
       <p class="post__description">
-        <span>{{ "Some description \n asdasd" }}</span>
+        <span>{{ challenge.challenge.description }}</span>
         <a href="#">...read more</a>
       </p>
       <div class="post__content">
         <div class="post__content-cnt">
           <img
-            src="https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg"
+            :src="
+              'http://51.210.149.115/uploads/' + challenge.interest[0].filename
+            "
             alt=""
             class="post__content-img"
           />
@@ -39,7 +45,7 @@
 
       <div class="post__footer">
         <div class="col-6 px-0">
-          <h5 class="post__prize">Prize: eternal glory</h5>
+          <h5 class="post__prize">Prize: {{ challenge.challenge.prize }}</h5>
           <h5 class="post__expiration">Closes in 3 d 15h</h5>
         </div>
         <div class="col-6 px-0 d-flex">
@@ -57,6 +63,9 @@ export default {
   name: "ChallengePost",
   components: {
     ButtonIcon
+  },
+  props: {
+    challenge: {}
   }
 };
 </script>
@@ -120,6 +129,7 @@ export default {
   position: relative;
 }
 .post__content-cnt {
+  min-height: 200px;
   max-width: 100%;
   overflow: hidden;
 }

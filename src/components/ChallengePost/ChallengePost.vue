@@ -1,6 +1,9 @@
 <template>
-  <ChallengePostUnFollowed v-if="false" />
-  <ChallengePostFollowed v-else />
+  <ChallengePostFollowed
+    v-if="challenge.user_is_follower"
+    :challenge="challenge"
+  />
+  <ChallengePostUnFollowed v-else :challenge="challenge" />
 </template>
 
 <script>
@@ -13,7 +16,7 @@ export default {
     ChallengePostFollowed
   },
   props: {
-    post: {
+    challenge: {
       type: Object
     }
   }

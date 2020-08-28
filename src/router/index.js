@@ -5,6 +5,7 @@ import Login from "../views/Login";
 import Register from "../views/Register";
 import Challenges from "../views/Challenges";
 import CreateChallenge from "../views/CreateChallenge";
+import store from "../store";
 
 Vue.use(VueRouter);
 

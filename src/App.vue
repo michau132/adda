@@ -19,6 +19,9 @@ export default {
     isVisible() {
       return this.$route.meta.navigation;
     }
+  },
+  async mounted() {
+    await this.$store.dispatch("getInterests");
   }
 };
 </script>
